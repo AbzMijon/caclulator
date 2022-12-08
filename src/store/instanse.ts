@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
     todos: todoReducer,
 })
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer<any>(persistConfig, rootReducer);
 
 const store = configureStore ({
     reducer: persistedReducer,
@@ -37,3 +37,5 @@ const store = configureStore ({
 
 export const persistor = persistStore(store);
 export default store;
+export type RootState = ReturnType<typeof rootReducer>
+export type AppDispatch = typeof store.dispatch;

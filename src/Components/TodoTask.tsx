@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../hooks';
 import styled from 'styled-components';
 import { removeTodo, toggleComplete } from '../store/slices/todoSlice';
 
 interface TodoTaskProps {
     text: string,
-    id: number,
+    id: number | string,
     completed: boolean,
 }
 
@@ -17,6 +17,7 @@ const StyledTodoTask = styled.div `
         display: flex;
         width: 100%;
         justify-content: space-between;
+        border-bottom: 1px solid #fff;
     }
     .task__text {
         font-size: 16px;
@@ -29,14 +30,14 @@ const StyledTodoTask = styled.div `
 
 const TodoTask:FC<TodoTaskProps> = ({ id, text, completed }) => {
     
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const handleDoneTodo = (e:React.MouseEvent<HTMLButtonElement>) => {
-        dispatch(toggleComplete({id}))
+        dispatch(toggleComplete(id))
     }
 
     const handleDeleteTodo = (e:React.MouseEvent<HTMLButtonElement>) => {
-        dispatch(removeTodo({id}));
+        dispatch(removeTodo(id));
     }
 
     return (
