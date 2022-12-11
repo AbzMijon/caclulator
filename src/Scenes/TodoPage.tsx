@@ -2,14 +2,8 @@ import React, { FC, useState } from 'react'
 import { useAppSelector } from '../hooks';
 import styled from 'styled-components';
 import TodoTask from '../Components/TodoTask';
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../hooks';
 import { addTodo, deleteAllTodos } from '../store/slices/todoSlice';
-
-interface ITodo {
-  id: number,
-  text: string,
-  completed: boolean,
-}
 
 const StyledTodoPage = styled.div `
   .todo {
@@ -26,7 +20,7 @@ const TodoPage:FC = () => {
 
   const [inputString, setInputString] = useState<string>('');
   const todos = useAppSelector(state => state.todos.todos);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   
   const handleAddTodo = (e:React.MouseEvent<HTMLButtonElement>) => {
     if(inputString) {
